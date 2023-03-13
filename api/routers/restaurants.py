@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from models.restaurant import Restaurant
@@ -12,6 +12,6 @@ router = APIRouter(tags=['restaurants'])
             response_model=list[Restaurant],
             status_code=status.HTTP_200_OK,
             tags='restaurants')
-async def get_all_restaurants(db: Session = Depends(get_db),
-                              current_user = Depends(get_user_by_id)):
+def get_all_restaurants(db: Session = Depends(get_db),
+                        current_user=Depends(get_user_by_id)):
     ...
